@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap');
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 87.5%;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    text-decoration: underline;
+}
+.hamburger {
+    cursor: pointer;
+}
+
+.hamburger > div {
+    width: 23px;
+    height: 4px;
+    border-radius: 2px;
+    background: black;
+    transition: 0.3s;
+    margin: 4px 0;
+    transform-origin: 0 50%;
+}
+#header {
+    display: grid;
+    grid-template-columns: 90px 240px 1fr;
+    padding: 16px;
+    align-items: center;
+    text-transform: uppercase;
+}
+#header.open .hamburger > div:nth-child(2) {
+    opacity: 0;
+}
+#header.open .hamburger > div:nth-child(1) {
+    transform: rotate(45deg);
+}
+#header.open .hamburger > div:nth-child(3) {
+    transform: rotate(-45deg);
+}
+.main-nav {
+    transform: translateY(-40px);
+    transition: 0.3s;
+    opacity: 0;
+}
+#header.open .main-nav {
+    transform: translateY(0);
+    opacity: 1;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./styles/normalize.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <meta charset="UTF-8" />
+    <title>Blog</title>
+  </head>
+  <body>
+    <header id="header">
+      <div onclick="toggleMenu()" class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <nav
+        class="main-nav"
+        style="display: flex; width: 100%; justify-content: space-between;"
+      >
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div></div>
+    </header>
+    <footer id="content">This is the main</footer>
+    <footer>This is the footer</footer>
+    <script>
+      function toggleMenu() {
+        var toggleHeaderButton = document.getElementById("header");
+        toggleHeaderButton.classList.toggle("open");
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+      const blogs = [
+        {
+          name: "My blog",
+          filename: "new-blog.md",
+          summary: "me blog!!",
+          url: "/bloog",
+        },
+        {
+          name: "2 blog",
+          filename: "bold.md",
+          summary: "ss!!",
+          url: "/bloossg",
+        },
+      ];
+
+      const html = Promise.all(
+        blogs.map((blog) => {
+          return fetch(`./blogs/${blog.filename}`)
+            .then((response) => response.text())
+            .then(
+              (text) =>
+                `<div><a href="${blog.url}"><h2>${
+                  blog.name
+                }</h2></a>${(blog.innerHTML = marked(text))}</div>`
+            );
+        })
+      ).then((res) => {
+        const blog = document.getElementById("content");
+        blog.innerHTML = res.join();
+      });
+    </script>
+  </body>
+</html>
